@@ -1,7 +1,8 @@
 module MU exposing (Lang, MUData, MUMsg, init, render, update)
 
 import Html exposing (Html)
-import Markdown.Render as Markdown
+import Markdown.Data as Markdown
+import Markdown.Render
 import MiniLatex.EditSimple as MiniLaTeX
 
 
@@ -17,7 +18,7 @@ type Lang
 
 type MUMsg
     = MLMsg MiniLaTeX.LaTeXMsg
-    | MDMsg Markdown.MarkdownMsg
+    | MDMsg Markdown.Render.MarkdownMsg
 
 
 init : Lang -> Int -> String -> MUData
@@ -48,5 +49,5 @@ render selectedId data =
                 |> List.map (Html.map MLMsg)
 
         MD data_ ->
-            Markdown.renderData selectedId data_
+            Markdown.render selectedId data_
                 |> List.map (Html.map MDMsg)

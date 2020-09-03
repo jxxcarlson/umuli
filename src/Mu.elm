@@ -1,4 +1,11 @@
-module MU exposing (Lang, MUData, MUMsg, init, render, update)
+module Mu exposing
+    ( Lang(..)
+    , MuData(..)
+    , MuMsg
+    , init
+    , render
+    , update
+    )
 
 import Html exposing (Html)
 import Markdown.Data as Markdown
@@ -6,7 +13,7 @@ import Markdown.Render
 import MiniLatex.EditSimple as MiniLaTeX
 
 
-type MUData
+type MuData
     = ML MiniLaTeX.Data
     | MD Markdown.MarkdownData
 
@@ -16,12 +23,24 @@ type Lang
     | LMarkdown
 
 
-type MUMsg
+type MuMsg
     = MLMsg MiniLaTeX.LaTeXMsg
     | MDMsg Markdown.Render.MarkdownMsg
 
 
-init : Lang -> Int -> String -> MUData
+
+-- muMsg : Lang -> unknown -> MuMsg
+--
+--muMsg lang =
+--    case lang of
+--        LMarkdown ->
+--            MDMsg
+--
+--        LMiniLaTeX ->
+--            MLMsg
+
+
+init : Lang -> Int -> String -> MuData
 init lang version content =
     case lang of
         LMiniLaTeX ->
@@ -31,7 +50,7 @@ init lang version content =
             MD (Markdown.init version content)
 
 
-update : Int -> String -> MUData -> MUData
+update : Int -> String -> MuData -> MuData
 update version content data =
     case data of
         ML data_ ->
@@ -41,7 +60,7 @@ update version content data =
             MD (Markdown.update version content data_)
 
 
-render : String -> MUData -> List (Html MUMsg)
+render : String -> MuData -> List (Html MuMsg)
 render selectedId data =
     case data of
         ML data_ ->

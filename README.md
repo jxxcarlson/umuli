@@ -1,1 +1,43 @@
-A demo to show how multiple markup languages can be used in a single app
+# MU Demo
+
+MU Demo is a small app to show how one can combine an editor,
+in this case a simple TextArea, with more than one 
+Markup Language to Html compiler.  This is accomplished 
+by a module `Mu` which implements three data types and three functions.
+The first data type discriminates among languages
+
+```elm
+    type Lang
+        = LMiniLaTeX
+        | LMarkdown
+```
+
+The second discriminates among the data structures that
+the individual languages use to store and process text.
+
+```elm
+    type MuData
+        = ML MiniLaTeX.Data
+        | MD Markdown.MarkdownData
+
+```
+The third defines the message types used.
+
+```elm
+    type MuMsg
+        = MLMsg MiniLaTeX.LaTeXMsg
+        | MDMsg Markdown.Render.MarkdownMsg
+```
+
+The three functions are
+
+```elm
+    init : Lang -> Int -> String -> MuData
+
+    update : Int -> String -> MuData -> MuData
+
+    render : String -> MuData -> List (Html MuMsg)
+```
+
+Thus, if a markup language provides suitable functions
+`init`, `update`, and `render`, it can be used in this context.

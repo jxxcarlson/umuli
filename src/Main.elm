@@ -3,24 +3,20 @@ module Main exposing (..)
 import Browser
 import Element exposing (..)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Font as Font
-import Element.Keyed as Keyed
 import File.Download as Download
 import Html exposing (..)
 import Html.Attributes as HA exposing (style)
-import Html.Events exposing (onClick, onInput)
-import Html.Keyed as Keyed
 import Markdown.LaTeX
 import Markdown.Option exposing (MarkdownOption(..), OutputOption(..))
 import Markdown.Render exposing (MarkdownMsg, MarkdownOutput)
 import Mu
 import Random
 import Strings
-import Style exposing (..)
 import Widget.Button as Button exposing (ButtonStyle(..), Size(..))
 import Widget.Style
 import Widget.TextArea as TextArea
-import Widget.TextField as TextField exposing (LabelPosition(..), Role(..))
 
 
 main : Program Flags Model Msg
@@ -50,7 +46,8 @@ type Msg
     | MarkdownExample
     | MiniLaTeXExample
     | MarkdownMsg MarkdownMsg
-    | ExportToLaTeX
+    | MarkdownToMiniLaTeX
+    | MiniLaTeXToMarkdown
     | MuMsg Mu.MuMsg
 
 
@@ -127,12 +124,33 @@ update msg model =
         MarkdownMsg _ ->
             ( model, Cmd.none )
 
-        ExportToLaTeX ->
+        MarkdownToMiniLaTeX ->
             let
                 laTeXContent =
                     Markdown.LaTeX.export model.sourceText
             in
-            ( model, download laTeXContent )
+            ( { model
+                | counter = model.counter + 1
+                , sourceText = laTeXContent
+                , data = Mu.init Mu.LMiniLaTeX model.counter laTeXContent
+                , lang = Mu.LMiniLaTeX
+              }
+            , Cmd.none
+            )
+
+        MiniLaTeXToMarkdown ->
+            let
+                markdownContent =
+                    "# MiniLaTeX to Markdown\n\n*Not yet implemented.*"
+            in
+            ( { model
+                | counter = model.counter + 1
+                , sourceText = markdownContent
+                , data = Mu.init Mu.LMarkdown model.counter markdownContent
+                , lang = Mu.LMarkdown
+              }
+            , Cmd.none
+            )
 
         MuMsg _ ->
             ( model, Cmd.none )
@@ -158,13 +176,14 @@ view model =
 
 mainColumn model =
     column [ paddingXY 80 40, spacing 12, padding 15 ]
-        [ editor model
+        [ header model
+        , editor model
         , footer model
         ]
 
 
 editor model =
-    row [ spacing 12 ]
+    row [ spacing 12, moveUp 10 ]
         [ textInput model
         , renderedText model
         ]
@@ -186,7 +205,6 @@ renderedText model =
         [ scrollbarY
         , width (px 400)
         , height (px windowHeight)
-        , elementAttribute "line-height" "150%"
         , Font.size 12
         , moveDown 11
         , Background.color (Element.rgb 1 1 1)
@@ -196,11 +214,44 @@ renderedText model =
 
 
 footer model =
-    row [ spacing 8 ] [ miniLaTeXTextButton, markdownTextButton, clearButton ]
+    row [ spacing 8 ]
+        [ miniLaTeXTextButton
+        , markdownTextButton
+        , clearButton
+        , markdownToLaTeXButton
+        , miniLaTeXToMarkdownButton
+        ]
+
+
+header model =
+    row [ spacing 8 ]
+        [ languageIndicator model.lang ]
+
+
+languageIndicator : Mu.Lang -> Element msg
+languageIndicator lang =
+    let
+        label =
+            case lang of
+                Mu.LMarkdown ->
+                    "Language: Markdown"
+
+                Mu.LMiniLaTeX ->
+                    "Language: MiniLaTeX"
+    in
+    el
+        [ Font.size 14
+        , Font.color (Element.rgb 0.1 0.1 0.1)
+        , Background.color (Element.rgb 1.0 1.0 1.0)
+        , Border.width 1
+        , height (px 30)
+        , padding 8
+        ]
+        (Element.text label)
 
 
 clearButton =
-    button Clear "Clear" "Clear source text" 80
+    redButton Clear "Clear" "Clear source text" 80
 
 
 markdownTextButton =
@@ -211,43 +262,41 @@ miniLaTeXTextButton =
     button MiniLaTeXExample "MiniLaTeX Example" "Restore MiniLaTeX text" 150
 
 
+markdownToLaTeXButton =
+    blueButton MarkdownToMiniLaTeX "Markdown > MiniLaTeX" "Convert Markdown to MiniLaTeX" 165
+
+
+miniLaTeXToMarkdownButton =
+    blueButton MiniLaTeXToMarkdown "MiniLaTeX > Markdown" "Convert MiniLaTeX to Markdown" 165
+
+
 button msg label title width =
     Button.make msg label
         |> Button.withWidth (Bounded width)
         |> Button.withSelected False
+        |> Button.withBackgroundColor (Element.rgb 0.1 0.1 0.1)
         |> Button.withTitle title
+        |> Button.toElement
+
+
+blueButton msg label title width =
+    Button.make msg label
+        |> Button.withWidth (Bounded width)
+        |> Button.withSelected False
+        |> Button.withTitle title
+        |> Button.withBackgroundColor (Element.rgb 0 0 0.65)
+        |> Button.toElement
+
+
+redButton msg label title width =
+    Button.make msg label
+        |> Button.withWidth (Bounded width)
+        |> Button.withSelected False
+        |> Button.withTitle title
+        |> Button.withBackgroundColor (Element.rgb 0.55 0 0)
         |> Button.toElement
 
 
 elementAttribute : String -> String -> Element.Attribute msg
 elementAttribute key value =
     Element.htmlAttribute (HA.attribute key value)
-
-
-
---
---display : Model -> Html Msg
---display model =
---    div []
---        [ h2 [ style "margin-left" "20px", style "margin-bottom" "0px", style "margin-top" "0px" ] [ text "Multi-Language Markup  Processor" ]
---        , p [ style "margin-left" "20px", style "margin-top" "0", style "font-size" "14pt" ] [ text "Markdown + Math, MiniLaTeX" ]
---        , editor model
---        , div [ style "width" "500px" ] [ Mu.render "-" model.data |> List.map (Html.map MuMsg) |> (\x -> div [] x) ]
---        , p [ style "clear" "left", style "margin-left" "20px", style "margin-top" "-20px" ]
---            [ clearButton 60
---            , exportToLaTeXButton 100
---            ]
---        , a [ HA.href "https://minilatex.io", style "clear" "left", style "margin-left" "20px", style "margin-top" "0px" ] [ text "minilatex.io" ]
---        , a [ HA.href "https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/", style "clear" "left", style "margin-left" "20px", style "margin-top" "0px" ] [ text "package.elm-lang.org" ]
---        ]
---
---
---label text_ =
---    p labelStyle [ text text_ ]
---
--- BUTTONS --
---
---
---
---exportToLaTeXButton width =
---    button ([ onClick ExportToLaTeX ] ++ buttonStyle colorBlue width) [ text "To LaTeX" ]

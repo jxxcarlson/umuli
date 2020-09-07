@@ -6,7 +6,7 @@ about =
 
 # About Umuli
 
-UMULI = *Universal Markup Interface*.
+UMULI = *Universal Markup Language Interface*.
 
 The **Umuli**  app shows how one can switch
 between markup languages in an editing and live-rendering enviroment.  This is accomplished using the `Umuli` module, which you will find in the source code.

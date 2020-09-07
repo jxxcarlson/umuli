@@ -62,7 +62,7 @@ so you won't be able to build the app from source until
 the next version of the compiler is published. 
 Look for it on September 8 or 9, 2020.
 
-- For some reason KaTeX is not recognizing the KaTeX fonts,
+- For some reason, KaTeX is not recognizing the KaTeX fonts,
 despite the fact that they are loaded with the app.  For this
 reason math formulas, while they are rendered, are not rendered in what should be
 glorious beauty.  I'll 

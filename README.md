@@ -66,4 +66,5 @@ Look for it on September 8 or 9, 2020.
 despite the fact that they are loaded with the app.  For this
 reason math formulas, while they are rendered, are not rendered in what should be
 glorious beauty.  I'll 
-try to get this sorted out soon.
+try to get this sorted out soon. If you understand why this is happening,
+please ping me (jxxcarlson at gmail or the elm slack, @epsilon2718 on Twitter). 

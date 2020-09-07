@@ -16,6 +16,6 @@ scripts:
     - cp public/Main.min.js ${GH}
     - cp public/assets/elm-katex.js ${GH}/assets
     - cp public/assets/style.css ${GH}/assets
-    - echo "Now go to ~/dev/github_pages/app/umui and push the changes"
+    - echo "Now go to ~/dev/github_pages/app/umuli and push the changes"
 
 

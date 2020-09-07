@@ -4,7 +4,7 @@ Umuli is a small app which demonstrates the use of
 UMULI (Universal Markup Language Interface) to
 switch between markup languages in the context
 of an editing and live-rendering environment.
-In the case at hand, we use Markdown and MiniLaTeX.
+In the case at hand, we use a Math-flavored Markdown and MiniLaTeX.
 
 Language integration is accomplished 
 via a module `Umuli` which implements three data types and three functions.

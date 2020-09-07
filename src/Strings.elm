@@ -27,7 +27,12 @@ To use the code in Umui, view it as a template and implement your own `init`, `u
 ## Note
 
 For some reason the KaTeX fonts are not loading.  That is why the math display in
-the MiniLaTeX example is messed up. Hope to have this fixed soon.
+the MiniLaTeX and Markdown examples is messed up. Oddly enough, I use the same KaTeX-relevant code for
+[markdown.minilatex.app](https://markdown.minilatex.app/), and there the display is fine.
+
+Hope to have this fixed soon.
+
+
 """
 
 

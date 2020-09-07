@@ -28,17 +28,22 @@
             "zwilias/elm-rosetree": "1.5.0"
         },
         "indirect": {
+            "NoRedInk/elm-string-conversions": "1.0.1",
+            "Punie/elm-parser-extras": "1.0.0",
             "andre-dietrich/parser-combinators": "3.2.0",
             "elm/bytes": "1.0.8",
+            "elm/http": "2.0.0",
             "elm/svg": "1.0.1",
             "elm/time": "1.0.0",
             "elm/url": "1.0.0",
             "elm/virtual-dom": "1.0.2",
             "elm-community/dict-extra": "2.4.0",
+            "elm-community/string-extra": "4.0.1",
             "erlandsona/assoc-set": "1.1.0",
             "pilatch/flip": "1.0.0",
             "pzp1997/assoc-list": "1.0.0",
-            "skyqrose/assoc-list-extra": "1.0.0"
+            "skyqrose/assoc-list-extra": "1.0.0",
+            "zwilias/elm-html-string": "2.0.2"
         }
     },
     "test-dependencies": {

@@ -1,20 +1,28 @@
-module Strings exposing (markdownExample, miniLaTeXExample, notes)
+module Strings exposing (about, markdownExample, miniLaTeXExample)
 
 
-testText =
-    """## Example
+about =
+    """
+# About Umui
 
-**Pythagoras** said: $a^2 + b^2 = c^2$.
+UMUI stands for *Universal Markup Interface*.
 
+The app **Umui**  is a demonstration how one can switch
+between markup languages in the context of an editing app using the `Umui` module which you will find in the source code.
 
-An integral formula:
+Here we use two markup languages, [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Math+Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/). For sample text in each of these two languages, click on the buttons  **MiniLaTeX Example**, **Markdown Example** below.
 
-$$
-\\int_{-\\infty}^\\infty e^{-x^2} dx = \\pi
-$$
+Note that the current markup language is displayed in the header, upper left. You may press the @red[Clear] button below to clear this window and type in your own text. The blue buttons on the right-hand side are for converting from one language to another.
 
-You should see two formulas above.
+Code is on [GitHub](https://github.com/jxxcarlson/mu).
+At the moment I am doing some experiments with conversions between formats, and so am importing the compilers for
+[MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/) from local repositories.
+I'll use package imports (and implement the MiniLaTeX to Markdown converter) quite soon (It is now September 7, 2020).
 
+## Using Umui
+
+To use the code in Umui, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
+[GitHub](https://github.com/jxxcarlson/umui)
 """
 
 
@@ -45,13 +53,13 @@ miniLaTeXExample =
 
 MiniLatex is a subset of LaTeX that can be
 rendered live in the browser using a custom just-in-time compiler.
-Mathematical text is rendered by \\href{https://mathjax.org}{MathJax}:
+Mathematical text is rendered by \\href{https://katex.org}{KaTeX}:
 
 $$
 \\int_{-\\infty}^\\infty e^{-x^2} dx = \\pi
 $$
 
-The combination of MiniLaTeX and MathJax
+The combination of MiniLaTeX and KaTeX
 gives you access to both text-mode
 and math-mode LaTeX in the browser.
 
@@ -602,11 +610,3 @@ Then open `index.html` to run the app.
 
 
 """
-
-
-notes =
-    """
-# Notes
-
-
-  """

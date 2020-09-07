@@ -1,13 +1,17 @@
-# MU Demo
+# Umui Demo
 
-MU Demo is a small app to show how one can combine an editor,
+Umui Demo is a small app which demonstrates the use of 
+UMUI (Universal Markup Interface)
+
+to show how one can combine an editor,
 in this case a simple TextArea, with more than one 
 Markup to Html compiler.  By "Markup," we mean any Markup 
 language, .e.g, Markdown or MiniLaTeX.
 
 This language integration accomplished 
-by a module `Mu` which implements three data types and three functions.
-The first data type discriminates among languages
+by a module `Umui` which implements three data types and three functions.
+The first data type discriminates among languages, which for 
+purposes of illustration are MiniLaTeX and a flavor of Markdown:
 
 ```elm
     type Lang

@@ -1,4 +1,4 @@
-module Mu exposing
+module Umui exposing
     ( Lang(..)
     , MuData(..)
     , MuMsg
@@ -26,18 +26,6 @@ type Lang
 type MuMsg
     = MLMsg MiniLaTeX.LaTeXMsg
     | MDMsg Markdown.Render.MarkdownMsg
-
-
-
--- muMsg : Lang -> unknown -> MuMsg
---
---muMsg lang =
---    case lang of
---        LMarkdown ->
---            MDMsg
---
---        LMiniLaTeX ->
---            MLMsg
 
 
 init : Lang -> Int -> String -> MuData

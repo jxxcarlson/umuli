@@ -11,10 +11,10 @@ import Html.Attributes as HA exposing (style)
 import Markdown.LaTeX
 import Markdown.Option exposing (MarkdownOption(..), OutputOption(..))
 import Markdown.Render exposing (MarkdownMsg, MarkdownOutput)
-import Mu
 import Random
 import Strings
-import Widget.Button as Button exposing (ButtonStyle(..), Size(..))
+import Umui
+import Widget.Button as Button exposing (ButtonStyle(..), Role(..), Size(..))
 import Widget.Style
 import Widget.TextArea as TextArea
 
@@ -30,11 +30,12 @@ main =
 
 
 type alias Model =
-    { lang : Mu.Lang
-    , data : Mu.MuData
+    { lang : Umui.Lang
+    , data : Umui.MuData
     , sourceText : String
     , counter : Int
     , seed : Int
+    , selectedLabel : String
     }
 
 
@@ -43,12 +44,13 @@ type Msg
     | GetContent String
     | GenerateSeed
     | NewSeed Int
+    | About
     | MarkdownExample
     | MiniLaTeXExample
     | MarkdownMsg MarkdownMsg
     | MarkdownToMiniLaTeX
     | MiniLaTeXToMarkdown
-    | MuMsg Mu.MuMsg
+    | MuMsg Umui.MuMsg
 
 
 type alias Flags =
@@ -59,11 +61,12 @@ init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         model =
-            { lang = Mu.LMarkdown
-            , data = Mu.init Mu.LMarkdown 0 Strings.markdownExample
-            , sourceText = Strings.markdownExample
+            { lang = Umui.LMarkdown
+            , data = Umui.init Umui.LMarkdown 0 Strings.about
+            , sourceText = Strings.about
             , counter = 0
             , seed = 0
+            , selectedLabel = "About Mu"
             }
     in
     ( model, Cmd.none )
@@ -80,7 +83,7 @@ update msg model =
         GetContent str ->
             ( { model
                 | sourceText = str
-                , data = Mu.update model.counter str model.data
+                , data = Umui.update model.counter str model.data
                 , counter = model.counter + 1
               }
             , Cmd.none
@@ -94,9 +97,20 @@ update msg model =
 
         Clear ->
             ( { model
-                | data = Mu.init model.lang model.counter ""
+                | data = Umui.init model.lang model.counter ""
                 , sourceText = ""
                 , counter = model.counter + 1
+              }
+            , Cmd.none
+            )
+
+        About ->
+            ( { model
+                | counter = model.counter + 1
+                , sourceText = Strings.about
+                , data = Umui.init Umui.LMarkdown model.counter Strings.about
+                , lang = Umui.LMarkdown
+                , selectedLabel = "About Mu"
               }
             , Cmd.none
             )
@@ -105,8 +119,9 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = Strings.markdownExample
-                , data = Mu.init Mu.LMarkdown model.counter Strings.markdownExample
-                , lang = Mu.LMarkdown
+                , data = Umui.init Umui.LMarkdown model.counter Strings.markdownExample
+                , lang = Umui.LMarkdown
+                , selectedLabel = "Markdown Example"
               }
             , Cmd.none
             )
@@ -115,8 +130,9 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = Strings.miniLaTeXExample
-                , data = Mu.init Mu.LMiniLaTeX model.counter Strings.miniLaTeXExample
-                , lang = Mu.LMiniLaTeX
+                , data = Umui.init Umui.LMiniLaTeX model.counter Strings.miniLaTeXExample
+                , lang = Umui.LMiniLaTeX
+                , selectedLabel = "MiniLaTeX Example"
               }
             , Cmd.none
             )
@@ -132,8 +148,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = laTeXContent
-                , data = Mu.init Mu.LMiniLaTeX model.counter laTeXContent
-                , lang = Mu.LMiniLaTeX
+                , data = Umui.init Umui.LMiniLaTeX model.counter laTeXContent
+                , lang = Umui.LMiniLaTeX
               }
             , Cmd.none
             )
@@ -146,8 +162,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = markdownContent
-                , data = Mu.init Mu.LMarkdown model.counter markdownContent
-                , lang = Mu.LMarkdown
+                , data = Umui.init Umui.LMarkdown model.counter markdownContent
+                , lang = Umui.LMarkdown
               }
             , Cmd.none
             )
@@ -175,7 +191,7 @@ view model =
 
 
 mainColumn model =
-    column [ paddingXY 80 40, spacing 12, padding 15 ]
+    column [ paddingXY 80 40, spacing 12, padding 15, width (px ((2 * windowWidth) + 20)) ]
         [ header model
         , editor model
         , footer model
@@ -193,9 +209,13 @@ windowHeight =
     550
 
 
+windowWidth =
+    450
+
+
 textInput model =
     TextArea.make GetContent model.sourceText ""
-        |> TextArea.withWidth 400
+        |> TextArea.withWidth windowWidth
         |> TextArea.withHeight windowHeight
         |> TextArea.toElement
 
@@ -203,20 +223,21 @@ textInput model =
 renderedText model =
     column
         [ scrollbarY
-        , width (px 400)
+        , width (px windowWidth)
         , height (px windowHeight)
         , Font.size 12
         , moveDown 11
         , Background.color (Element.rgb 1 1 1)
         , padding 10
         ]
-        (Mu.render "-" model.data |> List.map (Html.map MuMsg >> Element.html))
+        (Umui.render "-" model.data |> List.map (Html.map MuMsg >> Element.html))
 
 
 footer model =
-    row [ spacing 8 ]
-        [ miniLaTeXTextButton
-        , markdownTextButton
+    row [ spacing 8, centerX ]
+        [ aboutTextButton model.selectedLabel
+        , miniLaTeXTextButton model.selectedLabel
+        , markdownTextButton model.selectedLabel
         , clearButton
         , markdownToLaTeXButton
         , miniLaTeXToMarkdownButton
@@ -224,19 +245,19 @@ footer model =
 
 
 header model =
-    row [ spacing 8 ]
-        [ languageIndicator model.lang ]
+    row [ spacing 8, width (px ((2 * windowWidth) - 100)) ]
+        [ languageIndicator model.lang, row [ centerX, Font.size 18 ] [ Element.text "Umui" ] ]
 
 
-languageIndicator : Mu.Lang -> Element msg
+languageIndicator : Umui.Lang -> Element msg
 languageIndicator lang =
     let
         label =
             case lang of
-                Mu.LMarkdown ->
+                Umui.LMarkdown ->
                     "Language: Markdown"
 
-                Mu.LMiniLaTeX ->
+                Umui.LMiniLaTeX ->
                     "Language: MiniLaTeX"
     in
     el
@@ -250,16 +271,24 @@ languageIndicator lang =
         (Element.text label)
 
 
+
+-- BUTTONS
+
+
 clearButton =
-    redButton Clear "Clear" "Clear source text" 80
+    altButton Clear "Clear" "Clear source text" 80
 
 
-markdownTextButton =
-    button MarkdownExample "Markdown Example" "Restore Markdown text" 150
+aboutTextButton selectedLabel =
+    button About "About Mu" selectedLabel "Restore 'About Mu' text" 150
 
 
-miniLaTeXTextButton =
-    button MiniLaTeXExample "MiniLaTeX Example" "Restore MiniLaTeX text" 150
+markdownTextButton selectedLabel =
+    button MarkdownExample "Markdown Example" selectedLabel "Restore Markdown text" 150
+
+
+miniLaTeXTextButton selectedLabel =
+    button MiniLaTeXExample "MiniLaTeX Example" selectedLabel "Restore MiniLaTeX text" 150
 
 
 markdownToLaTeXButton =
@@ -270,11 +299,29 @@ miniLaTeXToMarkdownButton =
     blueButton MiniLaTeXToMarkdown "MiniLaTeX > Markdown" "Convert MiniLaTeX to Markdown" 165
 
 
-button msg label title width =
+button msg label selectedLabel title width =
     Button.make msg label
         |> Button.withWidth (Bounded width)
         |> Button.withSelected False
         |> Button.withBackgroundColor (Element.rgb 0.1 0.1 0.1)
+        |> Button.withTitle title
+        |> Button.withSelected (label == selectedLabel)
+        |> Button.toElement
+
+
+altButton msg label title width =
+    let
+        gray =
+            1.0
+
+        black =
+            0.45
+    in
+    Button.make msg label
+        |> Button.withWidth (Bounded width)
+        |> Button.withSelected False
+        |> Button.withBackgroundColor (Element.rgb black black black)
+        |> Button.withFontColor (Element.rgb gray gray gray)
         |> Button.withTitle title
         |> Button.toElement
 

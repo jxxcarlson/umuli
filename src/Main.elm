@@ -66,7 +66,7 @@ init flags =
             , sourceText = Strings.about
             , counter = 0
             , seed = 0
-            , selectedLabel = "About Mu"
+            , selectedLabel = "About Umui"
             }
     in
     ( model, Cmd.none )

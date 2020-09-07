@@ -23,7 +23,7 @@ I'll use package imports (and implement the MiniLaTeX to Markdown converter) qui
 ## Using Umuli
 
 To use the code in Umuli, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
-[GitHub](https://github.com/jxxcarlson/umui)
+[GitHub](https://github.com/jxxcarlson/umuli)
 
 ## Note
 

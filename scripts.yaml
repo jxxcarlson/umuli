@@ -1,5 +1,5 @@
 env:
-  GH: /Users/jxxcarlson/dev/github_pages/app/umui
+  GH: /Users/jxxcarlson/dev/github_pages/app/umuli
 
 scripts:
 
@@ -7,7 +7,7 @@ scripts:
 
   look: open -a /Applications/Firefox.app/ public/index.html
 
-  go: open -a /Applications/Firefox.app/ https://jxxcarlson.github.io/app/umui
+  go: open -a /Applications/Firefox.app/ https://jxxcarlson.github.io/app/umuli/
 
   publish:
     - elm make --optimize src/Main.elm --output=public/Main.js

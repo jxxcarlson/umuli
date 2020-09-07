@@ -4,6 +4,9 @@ module Strings exposing (about, markdownExample, miniLaTeXExample)
 about =
     """
 
+
+
+
 # About Umuli
 
 UMULI = *Universal Markup Language Interface*.
@@ -11,14 +14,20 @@ UMULI = *Universal Markup Language Interface*.
 The **Umuli**  app shows how one can switch
 between markup languages in an editing and live-rendering enviroment.  This is accomplished using the `Umuli` module, which you will find in the source code.
 
-Here we illustrate the use two markup languages, [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Math+Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/). Click on the  **MiniLaTeX Example** and **Markdown Example** buttons below to load the indicated text.
+We illustrate the use two markup languages, [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Math+Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/). Click on the  **MiniLaTeX Example** and **Markdown Example** buttons below to load the indicated text.
 
-The current markup language is displayed in the header, upper left. You may press the @red[Clear] button below to clear this window and type in your own text. The blue buttons on the right-hand side are for converting from one language to another.
+- The current markup language is displayed in the header, upper left.
+
+- You may press the **Clear** button below to clear this window and type in your own text.  It will be rendered in the current markup language.
+
+- The blue buttons in the footer, right-hand side are for converting from one markup language to another.
+
+- Conversions are in "first draft" form. While conversion from MiniLaTeX to Markdown will generally be lossy, for many simple documents, it is quite serviceable.
 
 Code is on [GitHub](https://github.com/jxxcarlson/mu).
 At the moment I am doing some experiments with conversions between formats, and so am importing the compilers for
 [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/) from local repositories.
-I'll use package imports (and implement the MiniLaTeX to Markdown converter) quite soon (It is now September 7, 2020).
+
 
 ## Using Umuli
 

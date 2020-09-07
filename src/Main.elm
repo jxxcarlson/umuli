@@ -11,6 +11,7 @@ import Html.Attributes as HA exposing (style)
 import Markdown.LaTeX
 import Markdown.Option exposing (MarkdownOption(..), OutputOption(..))
 import Markdown.Render exposing (MarkdownMsg, MarkdownOutput)
+import MiniLatex.Markdown
 import Random
 import Strings
 import Umuli
@@ -157,7 +158,7 @@ update msg model =
         MiniLaTeXToMarkdown ->
             let
                 markdownContent =
-                    "# MiniLaTeX to Markdown\n\n*Not yet implemented.*"
+                    MiniLatex.Markdown.convert model.sourceText
             in
             ( { model
                 | counter = model.counter + 1
@@ -246,7 +247,7 @@ footer model =
 
 header model =
     row [ spacing 8, width (px ((2 * windowWidth) - 100)) ]
-        [ languageIndicator model.lang, row [ centerX, Font.size 18 ] [ Element.text "Umuli" ] ]
+        [ languageIndicator model.lang, row [ centerX, Font.size 18 ] [ Element.text "Umuli, version Alpha 1" ] ]
 
 
 languageIndicator : Umuli.Lang -> Element msg

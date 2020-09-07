@@ -46,3 +46,16 @@ The three functions are
 
 Thus, if a markup language provides suitable functions
 `init`, `update`, and `render`, it can be used in this context.
+
+## Conversions
+
+In addition to supporting editing and rendering of documents
+in MiniLaTeX and Math-flavored Markdown, the app shows
+how documents can be converted from one markup language to another.
+These conversions should be regarded as "first-draft" efforts.
+
+
+## Installation
+
+Not ready yet: I have to publish latest version of the MiniLaTeX compiler.
+Look for it on September 8 or 9, 2020.

@@ -23,6 +23,11 @@ I'll use package imports (and implement the MiniLaTeX to Markdown converter) qui
 
 To use the code in Umui, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
 [GitHub](https://github.com/jxxcarlson/umui)
+
+## Note
+
+For some reason the KaTeX fonts are not loading.  That is why the math display in
+the MiniLaTeX example is messed up. Hope to have this fixed soon.
 """
 
 

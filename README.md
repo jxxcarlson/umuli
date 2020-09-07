@@ -1,15 +1,13 @@
-# Umuli Demo
+# Umuli
 
-Umui Demo is a small app which demonstrates the use of 
-UMULI (Universal Markup Language Interface)
+Umuli is a small app which demonstrates the use of 
+UMULI (Universal Markup Language Interface) to
+switch among markup languages in the context
+of an editing and live rendering environment.
+In the case at hand, we use Markdown and MiniLaTeX.
 
-to show how one can combine an editor,
-in this case a simple TextArea, with more than one 
-Markup to Html compiler.  By "Markup," we mean any Markup 
-language, .e.g, Markdown or MiniLaTeX.
-
-This language integration accomplished 
-by a module `Umuli` which implements three data types and three functions.
+Language integration is accomplished 
+via a module `Umuli` which implements three data types and three functions.
 The first data type discriminates among languages, which for 
 purposes of illustration are MiniLaTeX and a flavor of Markdown:
 

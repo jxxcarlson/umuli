@@ -1,4 +1,4 @@
-module Umui exposing
+module Umuli exposing
     ( Lang(..)
     , MuData(..)
     , MuMsg

@@ -2,8 +2,7 @@
     "type": "application",
     "source-directories": [
         "src",
-        "../meenylatex/src",
-        "../elm-markdown/src"
+        "../meenylatex/src"
     ],
     "elm-version": "0.19.1",
     "dependencies": {
@@ -21,6 +20,7 @@
             "elm-community/list-extra": "8.2.4",
             "elm-community/maybe-extra": "5.2.0",
             "elm-community/result-extra": "2.4.0",
+            "jxxcarlson/elm-markdown": "9.6.0",
             "jxxcarlson/elm-widget": "3.2.1",
             "jxxcarlson/htree": "2.0.1",
             "mdgriffith/elm-ui": "1.1.8",

@@ -13,7 +13,7 @@ import Markdown.Option exposing (MarkdownOption(..), OutputOption(..))
 import Markdown.Render exposing (MarkdownMsg, MarkdownOutput)
 import Random
 import Strings
-import Umui
+import Umuli
 import Widget.Button as Button exposing (ButtonStyle(..), Role(..), Size(..))
 import Widget.Style
 import Widget.TextArea as TextArea
@@ -30,8 +30,8 @@ main =
 
 
 type alias Model =
-    { lang : Umui.Lang
-    , data : Umui.MuData
+    { lang : Umuli.Lang
+    , data : Umuli.MuData
     , sourceText : String
     , counter : Int
     , seed : Int
@@ -50,7 +50,7 @@ type Msg
     | MarkdownMsg MarkdownMsg
     | MarkdownToMiniLaTeX
     | MiniLaTeXToMarkdown
-    | MuMsg Umui.MuMsg
+    | MuMsg Umuli.MuMsg
 
 
 type alias Flags =
@@ -61,12 +61,12 @@ init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         model =
-            { lang = Umui.LMarkdown
-            , data = Umui.init Umui.LMarkdown 0 Strings.about
+            { lang = Umuli.LMarkdown
+            , data = Umuli.init Umuli.LMarkdown 0 Strings.about
             , sourceText = Strings.about
             , counter = 0
             , seed = 0
-            , selectedLabel = "About Umui"
+            , selectedLabel = "About Umuli"
             }
     in
     ( model, Cmd.none )
@@ -83,7 +83,7 @@ update msg model =
         GetContent str ->
             ( { model
                 | sourceText = str
-                , data = Umui.update model.counter str model.data
+                , data = Umuli.update model.counter str model.data
                 , counter = model.counter + 1
               }
             , Cmd.none
@@ -97,7 +97,7 @@ update msg model =
 
         Clear ->
             ( { model
-                | data = Umui.init model.lang model.counter ""
+                | data = Umuli.init model.lang model.counter ""
                 , sourceText = ""
                 , counter = model.counter + 1
               }
@@ -108,9 +108,9 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = Strings.about
-                , data = Umui.init Umui.LMarkdown model.counter Strings.about
-                , lang = Umui.LMarkdown
-                , selectedLabel = "About Mu"
+                , data = Umuli.init Umuli.LMarkdown model.counter Strings.about
+                , lang = Umuli.LMarkdown
+                , selectedLabel = "About Umuli"
               }
             , Cmd.none
             )
@@ -119,8 +119,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = Strings.markdownExample
-                , data = Umui.init Umui.LMarkdown model.counter Strings.markdownExample
-                , lang = Umui.LMarkdown
+                , data = Umuli.init Umuli.LMarkdown model.counter Strings.markdownExample
+                , lang = Umuli.LMarkdown
                 , selectedLabel = "Markdown Example"
               }
             , Cmd.none
@@ -130,8 +130,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = Strings.miniLaTeXExample
-                , data = Umui.init Umui.LMiniLaTeX model.counter Strings.miniLaTeXExample
-                , lang = Umui.LMiniLaTeX
+                , data = Umuli.init Umuli.LMiniLaTeX model.counter Strings.miniLaTeXExample
+                , lang = Umuli.LMiniLaTeX
                 , selectedLabel = "MiniLaTeX Example"
               }
             , Cmd.none
@@ -148,8 +148,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = laTeXContent
-                , data = Umui.init Umui.LMiniLaTeX model.counter laTeXContent
-                , lang = Umui.LMiniLaTeX
+                , data = Umuli.init Umuli.LMiniLaTeX model.counter laTeXContent
+                , lang = Umuli.LMiniLaTeX
               }
             , Cmd.none
             )
@@ -162,8 +162,8 @@ update msg model =
             ( { model
                 | counter = model.counter + 1
                 , sourceText = markdownContent
-                , data = Umui.init Umui.LMarkdown model.counter markdownContent
-                , lang = Umui.LMarkdown
+                , data = Umuli.init Umuli.LMarkdown model.counter markdownContent
+                , lang = Umuli.LMarkdown
               }
             , Cmd.none
             )
@@ -230,7 +230,7 @@ renderedText model =
         , Background.color (Element.rgb 1 1 1)
         , padding 10
         ]
-        (Umui.render "-" model.data |> List.map (Html.map MuMsg >> Element.html))
+        (Umuli.render "-" model.data |> List.map (Html.map MuMsg >> Element.html))
 
 
 footer model =
@@ -246,18 +246,18 @@ footer model =
 
 header model =
     row [ spacing 8, width (px ((2 * windowWidth) - 100)) ]
-        [ languageIndicator model.lang, row [ centerX, Font.size 18 ] [ Element.text "Umui" ] ]
+        [ languageIndicator model.lang, row [ centerX, Font.size 18 ] [ Element.text "Umuli" ] ]
 
 
-languageIndicator : Umui.Lang -> Element msg
+languageIndicator : Umuli.Lang -> Element msg
 languageIndicator lang =
     let
         label =
             case lang of
-                Umui.LMarkdown ->
+                Umuli.LMarkdown ->
                     "Language: Markdown"
 
-                Umui.LMiniLaTeX ->
+                Umuli.LMiniLaTeX ->
                     "Language: MiniLaTeX"
     in
     el
@@ -280,7 +280,7 @@ clearButton =
 
 
 aboutTextButton selectedLabel =
-    button About "About Mu" selectedLabel "Restore 'About Mu' text" 150
+    button About "About Umuli" selectedLabel "Restore 'About Umuli' text" 150
 
 
 markdownTextButton selectedLabel =

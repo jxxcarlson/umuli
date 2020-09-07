@@ -3,25 +3,26 @@ module Strings exposing (about, markdownExample, miniLaTeXExample)
 
 about =
     """
-# About Umui
 
-UMUI stands for *Universal Markup Interface*.
+# About Umuli
 
-The app **Umui**  is a demonstration how one can switch
-between markup languages in the context of an editing app using the `Umui` module which you will find in the source code.
+UMULI = *Universal Markup Interface*.
 
-Here we use two markup languages, [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Math+Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/). For sample text in each of these two languages, click on the buttons  **MiniLaTeX Example**, **Markdown Example** below.
+The **Umuli**  app shows how one can switch
+between markup languages in an editing and live-rendering enviroment.  This is accomplished using the `Umuli` module, which you will find in the source code.
 
-Note that the current markup language is displayed in the header, upper left. You may press the @red[Clear] button below to clear this window and type in your own text. The blue buttons on the right-hand side are for converting from one language to another.
+Here we illustrate the use two markup languages, [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Math+Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/). Click on the  **MiniLaTeX Example** and **Markdown Example** buttons below to load the indicated text.
+
+The current markup language is displayed in the header, upper left. You may press the @red[Clear] button below to clear this window and type in your own text. The blue buttons on the right-hand side are for converting from one language to another.
 
 Code is on [GitHub](https://github.com/jxxcarlson/mu).
 At the moment I am doing some experiments with conversions between formats, and so am importing the compilers for
 [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/) from local repositories.
 I'll use package imports (and implement the MiniLaTeX to Markdown converter) quite soon (It is now September 7, 2020).
 
-## Using Umui
+## Using Umuli
 
-To use the code in Umui, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
+To use the code in Umuli, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
 [GitHub](https://github.com/jxxcarlson/umui)
 
 ## Note
@@ -31,6 +32,7 @@ the MiniLaTeX and Markdown examples is messed up. Oddly enough, I use the same K
 [markdown.minilatex.app](https://markdown.minilatex.app/), and there the display is fine.
 
 Hope to have this fixed soon.
+
 
 
 """

@@ -3,10 +3,6 @@ module Strings exposing (about, markdownExample, miniLaTeXExample)
 
 about =
     """
-
-
-
-
 # About Umuli
 
 UMULI = *Universal Markup Language Interface*.
@@ -24,7 +20,7 @@ We illustrate the use two markup languages, [MiniLaTeX](https://package.elm-lang
 
 - Conversions are in "first draft" form. While conversion from MiniLaTeX to Markdown will generally be lossy, for many simple documents, it is quite serviceable.
 
-Code is on [GitHub](https://github.com/jxxcarlson/mu).
+Code is on [GitHub](https://github.com/jxxcarlson/umuli).
 At the moment I am doing some experiments with conversions between formats, and so am importing the compilers for
 [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/) from local repositories.
 
@@ -41,9 +37,6 @@ the MiniLaTeX and Markdown examples is messed up. Oddly enough, I use the same K
 [markdown.minilatex.app](https://markdown.minilatex.app/), and there the display is fine.
 
 Hope to have this fixed soon.
-
-
-
 """
 
 

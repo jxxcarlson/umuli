@@ -8,8 +8,7 @@ In the case at hand, we use a Math-flavored Markdown and MiniLaTeX.
 
 Language integration is accomplished 
 via a module `Umuli` which implements three data types and three functions.
-The first data type discriminates among languages, which for 
-purposes of illustration are MiniLaTeX and a flavor of Markdown:
+The first data type discriminates among languages:
 
 ```elm
     type Lang
@@ -18,7 +17,7 @@ purposes of illustration are MiniLaTeX and a flavor of Markdown:
 ```
 
 The second discriminates among the data structures that
-the individual languages use to store and process text.
+the individual languages used to store and process text:
 
 ```elm
     type MuData
@@ -26,7 +25,7 @@ the individual languages use to store and process text.
         | MD Markdown.MarkdownData
 
 ```
-The third defines the message types used.
+The third defines the message types used:
 
 ```elm
     type MuMsg
@@ -55,7 +54,14 @@ how documents can be converted from one markup language to another.
 These conversions should be regarded as "first-draft" efforts.
 
 
-## Installation
+## Installation and Issues
 
-Not ready yet: I have to publish latest version of the MiniLaTeX compiler.
+
+- I am using a development version of the MiniLaTeX compiler,
+so you won't be able to build the app from source until
+the next version of the conpiler is published. 
 Look for it on September 8 or 9, 2020.
+
+- For some reason KaTeX is not recognizing the KaTeX fonts,
+despite the fact that they are loaded with the app.  I'll 
+try to get this sorted out soon.

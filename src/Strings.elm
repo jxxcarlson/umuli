@@ -3,6 +3,7 @@ module Strings exposing (about, markdownExample, miniLaTeXExample)
 
 about =
     """
+
 # About Umuli
 
 UMULI = *Universal Markup Language Interface*.
@@ -18,17 +19,18 @@ We illustrate the use two markup languages, [MiniLaTeX](https://package.elm-lang
 
 - The blue buttons in the footer, right-hand side are for converting from one markup language to another.
 
-- Conversions are in "first draft" form. While conversion from MiniLaTeX to Markdown will generally be lossy, for many simple documents, it is quite serviceable.
+- Conversions are in "first draft" form. Conversion from MiniLaTeX to Markdown will generally be lossy and imperfect because LaTeX is a much richer language. However, for many simple documents, it is quite serviceable.  Conversion from Markdown to MiniLaTeX is also a work-in-progress, but in general will perform better.
 
 Code is on [GitHub](https://github.com/jxxcarlson/umuli).
 At the moment I am doing some experiments with conversions between formats, and so am importing the compilers for
 [MiniLaTeX](https://package.elm-lang.org/packages/jxxcarlson/meenylatex/latest/) and [Markdown](https://package.elm-lang.org/packages/jxxcarlson/elm-markdown/latest/) from local repositories.
+Within a few days (around September 9 or 10, 2020), I will have these libraries updated so Umui
+can be built from its source.
 
 
 ## Using Umuli
 
-To use the code in Umuli, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.  The source code is on
-[GitHub](https://github.com/jxxcarlson/umuli)
+To use the code in Umuli, view it as a template and implement your own `init`, `update` and `render` functions.  See the README and the module comments for more information.
 
 ## Note
 
@@ -37,6 +39,7 @@ the MiniLaTeX and Markdown examples is messed up. Oddly enough, I use the same K
 [markdown.minilatex.app](https://markdown.minilatex.app/), and there the display is fine.
 
 Hope to have this fixed soon.
+
 """
 
 

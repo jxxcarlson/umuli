@@ -47,7 +47,7 @@ miniLaTeXExample =
 \\title{Sample MiniLaTeX Doc}
 
 \\begin{mathmacro}
-\\newcommand{\\bt}[1]{\\bf{#1}}
+\\newcommand{\\bt}[1]{\\boldsymbol{#1}}
 \\newcommand{\\mca}[0]{\\mathcal{A}}
 \\end{mathmacro}
 
@@ -219,7 +219,7 @@ Math-mode macros are added using the \\code{mathmacro} environment:
 
 \\begin{verbatim}
 \\begin{mathmacro}
-\\newcommand{\\bt}[1]{\\bf{#1}}
+\\newcommand{\\bt}[1]{\\boldsymbol{#1}}
 \\newcommand{\\mca}[0]{\\mathcal{A}}
 \\end{mathmacro}
 \\end{verbatim}
@@ -227,16 +227,16 @@ Math-mode macros are added using the \\code{mathmacro} environment:
 Then saying
 
 \\begin{verbatim}
- $$
+\\begin{equation}
  a^2 = \\bt{Z}/\\mca
- $$
+\\end{equation}
 \\end{verbatim}
 
 yields
 
-$$
-a^2 = \\bt{Z}/\\mca
-$$
+\\begin{equation}
+ a^2 = \\bt{Z}/\\mca
+\\end{equation}
 
 Likewise, saying
 
@@ -316,21 +316,6 @@ and can \\strike{also be struck}. Here are the macros:
 \\strike
 \\end{verbatim}
 
-\\section{Errors and related matters}
-
-Errors, as illustrated below, are rendered in real time and are reported in red, in place.
-For example, suppose you type the  text
-
-\\begin{verbatim}
-  $$
-  a^2 + b^2 = c^2
-\\end{verbatim}
-
-Then you will see this in the rendered text window:
-
-\\image{http://jxxcarlson.s3.amazonaws.com/miniLaTeXErrorMsg-2020-02-22.png}{Fig 2. Error message}{width: 200}
-
-We plan to make further improvements in error reporting.
 
 \\section{More about MiniLaTeX}
 

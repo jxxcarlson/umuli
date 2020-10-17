@@ -32,7 +32,7 @@ main =
 
 type alias Model =
     { lang : Umuli.Lang
-    , data : Umuli.MuData
+    , data : Umuli.UmuliData
     , sourceText : String
     , counter : Int
     , seed : Int
@@ -51,7 +51,7 @@ type Msg
     | MarkdownMsg MarkdownMsg
     | MarkdownToMiniLaTeX
     | MiniLaTeXToMarkdown
-    | MuMsg Umuli.MuMsg
+    | MuMsg Umuli.UmuliMsg
 
 
 type alias Flags =

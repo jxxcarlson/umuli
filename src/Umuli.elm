@@ -1,7 +1,7 @@
 module Umuli exposing
     ( Lang(..)
-    , MuData(..)
-    , MuMsg
+    , UmuliData(..)
+    , UmuliMsg
     , init
     , render
     , update
@@ -13,7 +13,7 @@ import Markdown.Render
 import MiniLatex.EditSimple as MiniLaTeX
 
 
-type MuData
+type UmuliData
     = ML MiniLaTeX.Data
     | MD Markdown.MarkdownData
 
@@ -23,12 +23,12 @@ type Lang
     | LMarkdown
 
 
-type MuMsg
+type UmuliMsg
     = MLMsg MiniLaTeX.LaTeXMsg
     | MDMsg Markdown.Render.MarkdownMsg
 
 
-init : Lang -> Int -> String -> MuData
+init : Lang -> Int -> String -> UmuliData
 init lang version content =
     case lang of
         LMiniLaTeX ->
@@ -38,7 +38,7 @@ init lang version content =
             MD (Markdown.init version content)
 
 
-update : Int -> String -> MuData -> MuData
+update : Int -> String -> UmuliData -> UmuliData
 update version content data =
     case data of
         ML data_ ->
@@ -48,7 +48,7 @@ update version content data =
             MD (Markdown.update version content data_)
 
 
-render : String -> MuData -> List (Html MuMsg)
+render : String -> UmuliData -> List (Html UmuliMsg)
 render selectedId data =
     case data of
         ML data_ ->
